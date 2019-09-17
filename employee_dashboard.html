@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="./bootstrap.min.css" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leave Management System</title>
+
+    <style>
+        .topnavigation a {
+            float: right;
+            color: black;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        
+        .container {
+            background-color: white;
+        }
+        
+        .site-header {
+            background-color: honeydew;
+        }
+        
+        .main {
+            background-color: bisque;
+        }
+        
+        .main-content-col {
+            background-color: beige;
+            width: 80%;
+            float: right;
+            min-height: 300px;
+        }
+        
+        .side-bar-col {
+            background-color: azure;
+            width: 20%;
+            min-height: 300px;
+            margin-right: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <header class="site-header">
+            <h1>Leave Management System</h1>
+        </header>
+
+        <div class="topnavigation">
+            <a class="active" text="home">HOME</a>
+            <a href="#" id="loginText"> LOG IN</a>
+            <a href="#" id="backText">BACK</a>
+
+
+            <form id="leaveRequest">
+                <label> Leave Type
+                    <input type="text"  id="leaveType"/>
+                </label>
+
+                <label> Start Date
+                        <input type="date" id="startDate"/>
+                </label>
+
+                <label> End Date
+                    <input type="date" id="endDate"/>
+                </label>
+                <button type="submit">submit</button>
+            </form>
+
+        </div>
+
+        <div class="main">
+            <div class="main-content-col">
+                This is the main content area
+            </div>
+            <div class="side-bar-col" id="leave">
+                <button type="button"> All Leave Requests</button> <br>
+                <button type="button"> Leave Requests</button><br>
+                <button type="button"> Leave Status</button><br>
+            </div>
+            <div class="side-bar-col" id="admin">
+                <button type="button"> Create User</button><br>
+                <button type="button"> All Users</button><br>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('#leaveRequest').on('submit', function(e) {
+                e.preventDefault();
+                let leaveType = $("#leaveType").val();
+                let startDate = $("#startDate").val();
+                let endDate = $("#endDate").val();
+                alert(startDate);
+
+                $.ajax({
+                    url: "  http://localhost:3000/Leave-Request",
+                    success: function(result) {
+                        console.log(result);
+                        alert('done');
+                    },
+                    method: "POST",
+                    data: {
+                        "Start-Date": startDate,
+                        " End-Date": endDate,
+                        "Leave-type": leaveType
+                    }
+                });
+            })
+
+
+
+
+        });
+    </script>
+
+
+</body>
+
+</html>
