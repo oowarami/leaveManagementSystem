@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .topnavigation a {
+            float: right;
+            color: black;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        
+        .container {
+            background-color: white;
+        }
+        
+        .site-header {
+            background-color: honeydew;
+        }
+        
+        .main {
+            background-color: bisque;
+        }
+        
+        .main-content-col {
+            background-color: beige;
+            width: 80%;
+            float: right;
+            min-height: 300px;
+        }
+        
+        .side-bar-col {
+            background-color: azure;
+            width: 20%;
+            min-height: 357px;
+            margin-right: 80%s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="site-header">
+            <h1>Leave Management System</h1>
+        </header>
+        <div class="topnavigation">
+            <a class="active" text="home">HOME</a>
+            <a text="Sign-in"> LOG IN</a>
+            <a text="user-profile">USER PROFILE</a>
+
+            <form>
+                <label for="Username"> Username
+                     <input type="text" placeholder="Enter Username" name="Username" required/>
+                </label>
+
+                <label for="Password"> Password
+                     <input type="password" placeholder="Enter Password" name="Password" required/>
+                </label>
+
+                <button type="submit"> Login</button>
+            </form>
+
+        </div>
+
+        <div class="main">
+            <div class="main-content-col">
+                This is the main content area
+            </div>
+            <div class="side-bar-col">
+               This is my side bar
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
