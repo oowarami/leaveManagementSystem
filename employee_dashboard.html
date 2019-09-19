@@ -6,18 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>Leave Management System</title>
 
     <style>
-        .topnavigation a {
-            float: right;
-            color: black;
-            text-align: center;
-            padding: 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-        
         .container {
             background-color: white;
         }
@@ -50,54 +42,65 @@
     <div class="container">
 
         <header class="site-header">
-            <h1>Leave Management System</h1>
+            <h2>Employee Dashboard</h2>
         </header>
-
-        <div class="topnavigation">
-            <a class="active" text="home">HOME</a>
-            <a href="#" id="loginText"> LOG IN</a>
-            <a href="#" id="backText">BACK</a>
-
-
-            <form id="leaveRequest">
-                <label> Leave Type
-                    <input type="text"  id="leaveType"/>
-                </label>
-
-                <label> Start Date
-                        <input type="date" id="startDate"/>
-                </label>
-
-                <label> End Date
-                    <input type="date" id="endDate"/>
-                </label>
-                <button type="submit">submit</button>
-            </form>
-
-        </div>
 
         <div class="main">
             <div class="main-content-col">
-                This is the main content area
-            </div>
-            <div class="side-bar-col" id="leave">
-                <button type="button"> All Leave Requests</button> <br>
-                <button type="button"> Leave Requests</button><br>
-                <button type="button"> Leave Status</button><br>
-            </div>
-            <div class="side-bar-col" id="admin">
-                <button type="button"> Create User</button><br>
-                <button type="button"> All Users</button><br>
+                <form id="leaveRequestForm">
+
+                    <label> Leave Type
+                        <input type="text"  id="leaveType"/>
+                     </label><br>
+
+                    <label> Start Date
+                        <input type="date" id="startDate"/>
+                     </label><br>
+
+                    <label> End Date
+                        <input type="date" id="endDate"/>
+                    </label><br>
+
+                    <button type="submit">submit</button><br>
+                    <button type="button" id="updateButton"> Update</button>
+
+                </form>
+                <table id="leaveRequestsTable"></table>
+                <table id="leaveStatusTable"></table>
             </div>
 
+            <div class="side-bar-col" id="leave">
+                <button type="button" id="AllleaveRequests"> All my leave requests</button> <br>
+                <button type="button" id="makeLeaveRequest"> make leave Request</button><br>
+                <button type="button" id="leaveStatus"> Leave Status</button><br>
+            </div>
         </div>
     </div>
 
     <script src="./jquery-3.4.1.min.js"></script>
     <script>
+        function deleteLeaveRequest(id) {
+            $.ajax({
+                url: "http://localhost:3000/Leave-Request/" + id,
+                success: function(result) {
+                    console.log(result);
+                    alert("done");
+                },
+                method: "DELETE"
+            });
+        }
         $(document).ready(function() {
 
-            $('#leaveRequest').on('submit', function(e) {
+            $("#leaveRequestForm").hide();
+            $("#makeLeaveRequest").on("click", function() {
+                $("#leaveRequestForm").show();
+            });
+
+            $("#updateButton").on("click", function() {
+                $("#updateButton").update();
+            });
+
+            $('#leaveRequestForm').on('submit', function(e) {
                 e.preventDefault();
                 let leaveType = $("#leaveType").val();
                 let startDate = $("#startDate").val();
@@ -117,11 +120,77 @@
                         "Leave-type": leaveType
                     }
                 });
-            })
+            });
 
+            // $('#sidebarCollapse').on('click', function() {
+            //     $('#sidebar').toggleClass('active');
+            // });
 
+            $("#AllleaveRequests").on("click", function() {
+                $.ajax({
+                    url: "http://localhost:3000/Leave-Request",
+                    success: function(result) {
+                        console.log(result);
+                        alert("done");
+                        $("#leaveRequestsTable").append(` 
+                        <tr>
+                            <th> Id </th>
+                            <th> Leave Type </th>
+                            <th> Start Date </th>
+                             <th> End Date </th> 
+                            <th> Actions </th> 
+                        </tr>
+                        `)
+                        for (let i = 0; i < result.length; i++) {
+                            let LeaveRequest = result[i];
+                            $("#leaveRequestsTable").append(`
+                            <tr>
+                                 <td> ${LeaveRequest["id"]} </td> 
+                                 <td> ${LeaveRequest["Leave-type"]} </td>
+                                 <td> ${LeaveRequest["Start-Date"]}</td>      
+                                 <td> ${LeaveRequest["End-Date"]}</td>
+                                 <td>
+                                 <button type = "button"onclick = "deleteLeaveRequest (${LeaveRequest['id']})" > Delete Leave Request < /button> 
+                                </td> 
+                            </tr>
+                            `);
 
+                        }
 
+                    },
+
+                    method: "GET"
+                });
+            });
+
+            $("#leaveStatus").on("click", function() {
+                $.ajax({
+                    url: "http://localhost:3000/Approve-Request",
+                    success: function(result) {
+                        console.log(result);
+                        alert("done");
+                        $("#leaveStatusTable").html(`
+                        <tr>
+                            <th> Leave Id </th>
+                            <th> Status </th>
+                            <th> Approved by </th>
+                        </tr>
+                        `)
+                        for (let i = 0; i < result.length; i++) {
+                            let LeaveRequest = result[i];
+                            $("#leaveStatusTable").append(`
+                            <tr>
+                                <td>${LeaveRequest['id']}</td>
+                                <td>${LeaveRequest["Status"]}</td>
+                                <td>${LeaveRequest["Approved-by"]}</td>
+                            </tr>
+                            `);
+
+                        }
+                    },
+                    method: "GET"
+                });
+            });
         });
     </script>
 
