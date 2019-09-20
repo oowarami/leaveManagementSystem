@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="./bootstrap.min.css" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leave Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        .topnavigation a {
+            float: right;
+            color: black;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        
+        .container {
+            background-color: white;
+        }
+        
+        .site-header {
+            background-color: honeydew;
+        }
+        
+        .main {
+            background-color: bisque;
+        }
+        
+        .main-content-col {
+            background-color: beige;
+            width: 80%;
+            float: right;
+            min-height: 300px;
+        }
+        
+        .side-bar-col {
+            background-color: azure;
+            width: 20%;
+            min-height: 300px;
+            margin-right: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <header class="site-header">
+            <h1>Leave Management System</h1>
+        </header>
+
+        <div class="topnavigation">
+            <a class="active" text="home">HOME</a>
+            <a href="#" id="loginText"> LOG IN</a>
+            <a href="#" id="signupText"> SIGN UP</a>
+            <a href="#" id="backText1">BACK</a>
+            <a href="#" id="backText2">BACK</a>
+
+
+            <form id="signUp">
+                <label for="Email"> Email
+                        <input type="text" placeholder="Enter Email" email="Email" required/>
+                </label>
+
+                <label for="Username"> Username
+                        <input type="text" placeholder="Enter Username" name="Username" required/>
+                </label>
+
+                <label for="Password"> Password
+                        <input type="password" placeholder="Enter Password" name="Password" required/>
+                </label>
+
+                <button type="submit"> Sign Up</button>
+            </form>
+
+            <form id="adminlogin">
+                <label for="Username"> Username
+                     <input type="text" placeholder="Enter Username" name="Username" required/>
+                </label>
+
+                <label for="Password"> Password
+                     <input type="password" placeholder="Enter Password" name="Password" required/>
+                </label>
+
+                <button type="submit"> Login</button>
+            </form>
+
+
+        </div>
+
+        <div class="main">
+            <div class="main-content-col">
+                This is the main content area
+            </div>
+            <div class="side-bar-col" id="leave">
+                <button type="button"> All Leave Requests</button><br>
+                <button type="button"> Leave Status</button><br>
+            </div>
+            <div class="side-bar-col" id="admin">
+                <button type="button"> Create User</button><br>
+                <button type="button"> All Users</button><br>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            // This is for an existing Admin to log in
+
+            $('#adminlogin').hide();
+            $('#backText1').hide();
+            $('#loginText').on('click', function() {
+                $('#loginText').hide();
+                $('#adminlogin').show();
+                $('#backText1').show();
+            });
+
+            $('#backText1').on('click', function() {
+                $('#loginText').show();
+                $('#adminlogin').hide();
+                $('#backText1').hide();
+
+            });
+
+            //  This is for a new Admin to sign up
+
+            $('#signUp').hide();
+            $('#backText2').hide();
+            $('#loginText').on('click', function() {
+                $('#signupText').hide();
+                $('#signUp').show();
+                $('#backText2').show();
+            });
+
+            $('#backText2').on('click', function() {
+                $('#signupText').show();
+                $('#signUp').hide();
+                $('#backText2').hide();
+
+            });
+            // This is to post the information of existing admins into the database
+
+            $("adminlogin").on("submit", function(e) {
+                e.preventDefault();
+                let Username = $("#username").val();
+                let Password = $("#password").val();
+                alert("Logged In!!");
+                $.ajax({
+                    url: `http://localhost:3000/Admin-Credentials?name=${Username}&password=${Password}`,
+                    success: function(result) {
+                        console.log(result);
+                        alert("done")
+                    },
+                    method: "POST",
+                    data: {
+                        "name": Username,
+                        "Email": Password
+                    }
+                });
+            });
+
+        });
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
