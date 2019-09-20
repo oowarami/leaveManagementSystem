@@ -1,14 +1,36 @@
 {
-    "Employee-Credentials": [
-        { "id": 1, "Name": "Laju Eresanara ", "Email": "lajueresanara@gmail.com " }
-    ],
-    "Leave-Request": [
-        { "Start-Date": "23/9/2019", "End-Date": " 30/9/2019", "Leave-type": " Sick Leave" }
-    ],
-    "Admin-Credentials": [
-        { "id": 1, "Name": " Warami Eresanara", "Email": "wrmyeresanara@gmail.com " }
-    ],
-    "(Dis)Approve-Request": [
-        { "Status": " Approved", "Approved-by": "Warami Eresanara" }
-    ]
+  "User-Credentials": [
+    {
+      "id": 1,
+      "username": "Laju",
+      "email": "lajueresanara@gmail.com",
+      "password": "hi",
+      "isAdmin": false
+    },
+    {
+      "id": 2,
+      "username": "warami",
+      "email": "wrmyeresanara@gmail.com",
+      "password": "hello",
+      "isAdmin": true
+    }
+  ],
+  "Leave-Request": [
+    {
+      "Start-Date": "2019-09-19",
+      "End-Date": "2019-09-21",
+      "Leave-type": "break from logical reasoning",
+      "userEmail": "lajueresanara@gmail.com",
+      "status": "approved",
+      "id": 1
+    },
+    {
+      "Start-Date": "2019-09-11",
+      "End-Date": "2019-09-20",
+      "Leave-type": "sick leave",
+      "userEmail": "lajueresanara@gmail.com",
+      "status": "disapproved",
+      "id": 2
+    }
+  ]
 }
