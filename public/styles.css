@@ -8,7 +8,7 @@
 .form {
     position: relative;
     z-index: 1;
-    background: white;
+    background: #ADD8E6;
     max-width: 360px;
     margin: 0 auto 100px;
     padding: 45px;
@@ -17,9 +17,9 @@
 }
 
 .form input {
-    font-family: "Roboto", sans-serif;
+    font-family: "Poppins", sans-serif;
     outline: 0;
-    background: honeydew;
+    background: azure;
     width: 100%;
     border: 0;
     margin: 0 0 15px;
@@ -29,14 +29,14 @@
 }
 
 .form button {
-    font-family: "Roboto", sans-serif;
+    font-family: 'centurygothicbold', 'CircularStd', sans-serif;
     text-transform: uppercase;
     outline: 0;
-    background: bisque;
+    background: whitesmoke;
     width: 100%;
     border: 0;
     padding: 15px;
-    color: black;
+    color: #144499;
     font-size: 14px;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
@@ -46,7 +46,7 @@
 .form button:hover,
 .form button:active,
 .form button:focus {
-    background: bisque;
+    background: azure;
 }
 
 .form .message {
@@ -56,7 +56,7 @@
 }
 
 .form .message a {
-    color: #4CAF50;
+    color: #144499;
     text-decoration: none;
 }
 
@@ -92,7 +92,7 @@
 }
 
 .container .info span {
-    color: #4d4d4d;
+    color: #144499;
     font-size: 12px;
 }
 
@@ -102,17 +102,26 @@
 }
 
 .container .info span .fa {
-    color: #EF3B3A;
+    color: #144499;
 }
 
 body {
-    background: bisque;
+    background: whitesmoke;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(right, beige, BISQUE);
-    background: -moz-linear-gradient(right, beige, BISQUE);
-    background: -o-linear-gradient(right, beige, BISQUE);
-    background: linear-gradient(to left, beige, BISQUE);
-    font-family: "Roboto", sans-serif;
+    /* background: -webkit-linear-gradient(right, #0645ad, BISQUE);
+    background: -moz-linear-gradient(right, #0645ad, BISQUE);
+    background: -o-linear-gradient(right, #0645ad, BISQUE);
+    background: linear-gradient(to left, #0645ad, BISQUE); */
+    background-image: linear-gradient(to top, grayscale 0%, whitesmoke 100%);
+    font-family: 'centurygothicbold', 'CircularStd', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+h2 {
+    font-family: 'centurygothicbold', 'CircularStd', sans-serif;
+    font-size: 35px;
+    color: #144499;
+    line-height: 40px;
+    margin-bottom: 10px;
 }
